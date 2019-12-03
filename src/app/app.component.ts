@@ -1,18 +1,17 @@
 import { Component } from '@angular/core';
-import { Board } from './game/board';
-import { Cell } from './game/cell';
+import { Board } from './services/board/board.service';
+import { Cell } from './services/cell/cell.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
   title = 'minesweeper';
-  board: Board;
 
-  constructor() {
-    this.reset();
+  constructor(private board: Board) {
+      console.log(board);
   }
 
   checkCell(cell: Cell) {
@@ -33,7 +32,7 @@ export class AppComponent {
   }
 
   reset(){
-    this.board = new Board(20,50);
+    this.board.refresh();
   }
 
 }

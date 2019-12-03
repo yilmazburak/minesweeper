@@ -1,4 +1,5 @@
-import { Cell } from "./cell";
+import { Cell } from "../cell/cell.service";
+import { Injectable } from '@angular/core';
 
 const PEERS = [
     [-1, -1],
@@ -12,13 +13,32 @@ const PEERS = [
     [1, 1],
 ];
 
+export interface BoardOptions {
+  size?: number;
+  mines?: number;
+};
+
+
+@Injectable({
+  providedIn: 'root',
+})
 export class Board {
+    private defaultOptions: BoardOptions = {
+      size: 15,
+      mines: 50,
+    };
+
     cells: Cell[][] = [];
 
     private remainingCells = 0;
     private mineCount = 0;
+    constructor(){
+      this.refresh();
+    }
 
-    constructor(size: number, mines: number) {
+    refresh(options?: BoardOptions) {
+      const size = options ? options.size || this.defaultOptions.size : this.defaultOptions.size;
+      const mines = options ? options.mines || this.defaultOptions.mines: this.defaultOptions.mines;;
         for (let y = 0; y < size; y++) {
             this.cells[y] = [];
             for (let x = 0; x < size; x++) {
@@ -32,7 +52,6 @@ export class Board {
         }
 
         // Count Mines
-
         for (let y = 0; y < size; y++) {
             for (let x = 0; x < size; x++) {
                 let adjacentMines = 0;
@@ -50,6 +69,11 @@ export class Board {
         }
         this.remainingCells = (size * size) - this.mineCount;
 
+    }
+
+    getMineCount(): number {
+      console.log("MineCount");
+      return this.mineCount;
     }
 
     getRandomCell(): Cell {
@@ -90,8 +114,5 @@ export class Board {
             }
         }
     }
-
-    gameOver() {
-
-    }
+  
 }
