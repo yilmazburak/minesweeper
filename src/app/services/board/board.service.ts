@@ -1,5 +1,6 @@
 import { Cell } from "../cell/cell.service";
 import { Injectable } from '@angular/core';
+import { BoardOptions } from 'src/app/interfaces/board-options.interface';
 
 const PEERS = [
     [-1, -1],
@@ -12,11 +13,6 @@ const PEERS = [
     [1, 0],
     [1, 1],
 ];
-
-export interface BoardOptions {
-  size?: number;
-  mines?: number;
-};
 
 
 @Injectable({
