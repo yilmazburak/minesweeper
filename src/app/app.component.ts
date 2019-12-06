@@ -11,22 +11,27 @@ export class AppComponent {
   title = 'minesweeper';
 
   constructor(private board: Board) {
-      console.log(board);
   }
 
   checkCell(cell: Cell) {
     const result = this.board.checkCell(cell);
     if(result === 'gameover') {
-      alert('You Lose!');
+      this.board.lose = true;
+      // alert('You Lose!');
     } else if (result === 'win'){
-      alert('You Win!');
+      this.board.win = true;
+      // alert('You Win!');
+
     }
   }
 
   flag(cell: Cell) {
     if(cell.status === 'flag') {
+      this.board.setFlagCount(this.board.getFlagCount()-1);
       cell.status = 'open';
+
     }else if(cell.status === 'open') {
+      this.board.setFlagCount(this.board.getFlagCount()+1);
       cell.status = 'flag';
     }
   }

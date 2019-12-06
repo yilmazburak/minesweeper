@@ -27,7 +27,11 @@ export class Board {
   cells: Cell[][] = [];
 
   private remainingCells = 0;
+  private flagCount = 0;
   private mineCount = 0;
+  public win = false;
+  public lose = false;
+
   constructor() {
     this.refresh();
   }
@@ -38,6 +42,9 @@ export class Board {
 
     this.remainingCells = 0;
     this.mineCount = 0;
+    this.flagCount = 0;
+    this.win = false;
+    this.lose = false;
 
     for (let y = 0; y < size; y++) {
       this.cells[y] = [];
@@ -82,6 +89,14 @@ export class Board {
     return this.cells[y][x];
   }
 
+  getFlagCount(){
+    return this.flagCount;
+  }
+
+  setFlagCount(flagCount: number){
+    this.flagCount = flagCount;
+  }
+
   checkCell(cell: Cell): 'gameover' | 'win' | null {
     if (cell.status !== "open") {
       return;
@@ -90,7 +105,7 @@ export class Board {
       return 'gameover';
     } else {
       cell.status = 'clear';
-      //Empty celli let's clear the whole block.
+      //Empty cell - let's clear the whole block.
       if (cell.proximityMines === 0) {
         for (const peer of PEERS) {
           if (this.cells[cell.row + peer[0]] && this.cells[cell.row + peer[0]][cell.column + peer[1]]) {

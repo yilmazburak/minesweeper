@@ -4,13 +4,37 @@ $asbestos: #7f8c8d;
 
 
 nav{
+  background-color: $belize-hole;
+  height: 70px;
+
   .display{
-    height: 100px;
-    background-color: $belize-hole;
-    text-align:center;
-  
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .displayFrame{
+    display: inline-block !important;
+    width: 40px;
+    height: 40px;
+    margin: 15px;
+    margin-left: 150px;
+    margin-right: 150px;
+    background: #27ae60;
+    display: table-cell;
+    border-radius: 5px;
+
     .mineCount{
+      text-align: center;
+      vertical-align: middle;
+      color: white;
+      line-height: 40px;
     }
+
+  }
+
+  .resetFrame{
+    display: inline-block !important;     
 
     button{
       background-color: $concrete;
@@ -21,7 +45,6 @@ nav{
       border: .5px darkgrey solid;
       border-radius: 5px;
       transition-duration: 200ms;
-  
     }
   
     button:hover{
