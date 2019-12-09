@@ -11,7 +11,6 @@ import { Timer } from '../../services/timer/timer.service';
 export class StatusBarComponent implements OnInit {
 
   constructor(private board: Board, private timer: Timer) {
-    timer.start();
     console.log(timer);
   }
 
@@ -20,8 +19,8 @@ export class StatusBarComponent implements OnInit {
 
   reset(){
     this.board.refresh();
+    this.timer.stopClick();
   }
-
   
 
 }

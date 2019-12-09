@@ -11,7 +11,7 @@ export class Timer {
   private progressNum = 0;
   progress: string;
   second: number;
-  isRunning = true;
+  isRunning = false;
   isComplete = false;
 
   timer$: Observable<number>;
@@ -26,29 +26,34 @@ export class Timer {
     this.progress = `${this.progressNum}%`;
     this.second = this.progressNum;
   }
-  start() {
-    this.getProgress();
 
-    this.timer$ = interval(1000)
-      .pipe(
-        takeUntil(this.pauseClick$),
-        takeUntil(this.stopClick$)
-      );
+  startClick() {
+    if(!this.isRunning){
+      this.isRunning = true;
+      this.getProgress();
 
-    this.timerObserver = {
-      next: (_: number) => {
-        if (this.progressNum < 999) {
-          this.progressNum += 1;
-          this.getProgress();
-        } else {
-          this.stopClick$.next();
-          this.isRunning = false;
-          this.isComplete = true;
+      this.timer$ = interval(1000)
+        .pipe(
+          takeUntil(this.pauseClick$),
+          takeUntil(this.stopClick$)
+        );
+  
+      this.timerObserver = {
+        next: (_: number) => {
+          if (this.progressNum < 999) {
+            this.progressNum += 1;
+            this.getProgress();
+          } else {
+            this.stopClick$.next();
+            this.isRunning = false;
+            this.isComplete = true;
+          }
         }
-      }
-    };
-
-    this.timer$.subscribe(this.timerObserver);
+      };
+  
+      this.timer$.subscribe(this.timerObserver);
+    }
+    
   }
 
   pauseClick() {

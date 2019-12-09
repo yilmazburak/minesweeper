@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Board } from './services/board/board.service';
 import { Cell } from './services/cell/cell.service';
+import { Timer } from './services/timer/timer.service';
 
 @Component({
   selector: 'app-root',
@@ -10,16 +11,21 @@ import { Cell } from './services/cell/cell.service';
 export class AppComponent {
   title = 'minesweeper';
 
-  constructor(private board: Board) {
+  constructor(private board: Board, private timer: Timer) {
   }
 
   checkCell(cell: Cell) {
     const result = this.board.checkCell(cell);
+    this.timer.startClick();
+
+
     if(result === 'gameover') {
       this.board.lose = true;
+      this.timer.pauseClick();
       // alert('You Lose!');
     } else if (result === 'win'){
       this.board.win = true;
+      this.timer.pauseClick();
       // alert('You Win!');
 
     }
