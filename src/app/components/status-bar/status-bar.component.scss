@@ -1,6 +1,15 @@
 $belize-hole: #2980b9;
+$turquoise: #1abc9c;
+$emerald: #2ecc71;
 $concrete: #95a5a6;
 $asbestos: #7f8c8d;
+$wet-asphalt: #34495e;
+
+@font-face {
+  font-family: 'digital-7';
+  src: url("/assets/fonts/digital-7/digital-7.ttf") format("truetype");
+}
+$font-timer: 'digital-7', sans-serif;
 
 
 nav{
@@ -18,21 +27,41 @@ nav{
     width: 40px;
     height: 40px;
     margin: 15px;
-    margin-left: 150px;
-    margin-right: 150px;
-    background: #27ae60;
+    
+    background: $turquoise;
     display: table-cell;
     border-radius: 5px;
 
     .mineCount{
       text-align: center;
       vertical-align: middle;
-      color: white;
+      color: $wet-asphalt;
       line-height: 40px;
+      font-family: $font-timer;
+      font-size: large;
+    }
+
+    .timer{
+      text-align: center;
+      vertical-align: middle;
+      color: $wet-asphalt;
+      line-height: 40px;
+      font-family: $font-timer;
+      font-size: large;
+        
     }
 
   }
 
+  .minePic{
+    margin-top: 20px;
+    margin-right: 120px;
+  }
+
+  .clockPic{
+    margin-top: 20px;
+    margin-left: 120px;
+  }
   .resetFrame{
     display: inline-block !important;     
 

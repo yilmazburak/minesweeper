@@ -12,6 +12,7 @@ export class AppComponent {
   title = 'minesweeper';
 
   constructor(private board: Board, private timer: Timer) {
+    this.timer.stopClick();
   }
 
   checkCell(cell: Cell) {
