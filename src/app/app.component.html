@@ -2,7 +2,7 @@
 <table>
   <tr *ngFor="let row of board.cells; index as y;">
     <td *ngFor="let cell of row; index as x" class="outer-block" (click)="checkCell(cell);" (contextmenu)="$event.preventDefault(); flag(cell);">
-      <!-- <div>Status: {{cell.status}}</div> -->
+      <!-- <div style="font-size: 8px;">Status: {{cell.status}}</div> -->
       <div *ngIf="cell.status === 'clear' && !cell.mine" class="inner-block">
         <div *ngIf="cell.status === 'clear' && !cell.mine && cell.proximityMines">
           <div *ngIf="cell.proximityMines === 1" class="one">{{cell.proximityMines}}</div>

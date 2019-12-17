@@ -98,7 +98,7 @@ export class Board {
   }
 
   checkCell(cell: Cell): 'gameover' | 'win' | null {
-    if (cell.status !== "open") {
+    if (cell.status !== "close") {
       return;
     } else if (cell.mine) {
       this.revealAll();
@@ -120,10 +120,20 @@ export class Board {
     }
   }
 
+  revealFlags(){
+    for (const row of this.cells) {
+      for (const cell of row) {
+        if (cell.status === 'close') {
+          cell.status = 'flag';
+        }
+      }
+    }
+  }
+
   revealAll() {
     for (const row of this.cells) {
       for (const cell of row) {
-        if (cell.status === 'open') {
+        if (cell.status === 'close') {
           cell.status = 'clear';
         }
       }

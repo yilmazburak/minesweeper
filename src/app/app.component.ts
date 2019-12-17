@@ -16,30 +16,37 @@ export class AppComponent {
   }
 
   checkCell(cell: Cell) {
-    const result = this.board.checkCell(cell);
-    this.timer.startClick();
-
-
-    if(result === 'gameover') {
-      this.board.lose = true;
-      this.timer.pauseClick();
-      // alert('You Lose!');
-    } else if (result === 'win'){
-      this.board.win = true;
-      this.timer.pauseClick();
-      // alert('You Win!');
-
+    if(!this.board.win && !this.board.lose){
+      const result = this.board.checkCell(cell);
+      this.timer.startClick();
+  
+  
+      if(result === 'gameover') {
+        this.board.lose = true;
+        this.timer.pauseClick();
+        // alert('You Lose!');
+      } else if (result === 'win'){
+        this.board.win = true;
+        this.board.revealFlags();
+        this.board.setFlagCount(0);
+        this.timer.pauseClick();
+        // alert('You Win!');
+  
+      }
     }
+    
   }
 
   flag(cell: Cell) {
-    if(cell.status === 'flag') {
-      this.board.setFlagCount(this.board.getFlagCount()-1);
-      cell.status = 'open';
+    if(!this.board.win && !this.board.lose){
+      if(cell.status === 'flag') {
+        this.board.setFlagCount(this.board.getFlagCount()-1);
+        cell.status = 'close';
 
-    }else if(cell.status === 'open') {
-      this.board.setFlagCount(this.board.getFlagCount()+1);
-      cell.status = 'flag';
+      }else if(cell.status === 'close') {
+        this.board.setFlagCount(this.board.getFlagCount()+1);
+        cell.status = 'flag';
+      }
     }
   }
 
