@@ -97,6 +97,10 @@ export class Board {
     this.flagCount = flagCount;
   }
 
+  getMineCount(){
+    return this.mineCount;
+  }
+  
   checkCell(cell: Cell): 'gameover' | 'win' | null {
     if (cell.status !== "close") {
       return;

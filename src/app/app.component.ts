@@ -28,7 +28,7 @@ export class AppComponent {
       } else if (result === 'win'){
         this.board.win = true;
         this.board.revealFlags();
-        this.board.setFlagCount(0);
+        this.board.setFlagCount(this.board.getMineCount());
         this.timer.pauseClick();
         // alert('You Win!');
   
