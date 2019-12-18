@@ -15,6 +15,10 @@ export class AppComponent {
     this.timer.stopClick();
   }
 
+  getBoard(){
+    return this.board;
+  }
+
   checkCell(cell: Cell) {
     if(!this.board.win && !this.board.lose){
       const result = this.board.checkCell(cell);

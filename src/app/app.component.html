@@ -1,6 +1,6 @@
 <app-status-bar></app-status-bar>
 <table>
-  <tr *ngFor="let row of board.cells; index as y;">
+  <tr *ngFor="let row of getBoard().cells; index as y;">
     <td *ngFor="let cell of row; index as x" class="outer-block" (click)="checkCell(cell);" (contextmenu)="$event.preventDefault(); flag(cell);">
       <!-- <div style="font-size: 8px;">Status: {{cell.status}}</div> -->
       <div *ngIf="cell.status === 'clear' && !cell.mine" class="inner-block">

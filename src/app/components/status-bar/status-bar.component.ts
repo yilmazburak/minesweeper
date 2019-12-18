@@ -17,6 +17,14 @@ export class StatusBarComponent implements OnInit {
   ngOnInit() {
   }
 
+  getBoard(){
+    return this.board;
+  }
+
+  getTimer(){
+    return this.timer;
+  }
+
   reset(){
     this.board.refresh();
     this.timer.stopClick();
